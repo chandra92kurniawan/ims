@@ -26,7 +26,7 @@ class Welcome extends CI_Controller {
 	public function index(){
 		$username=$this->session->userdata('username');
 		if($username!=''){
-			redirect('users');
+			redirect('home');
 		}else{
 			redirect('welcome/login','refresh');
 		}
@@ -45,9 +45,15 @@ class Welcome extends CI_Controller {
 				$sess=array('username'=>$dt->USERNAME,
 							'jabatan'=>$dt->JABATAN,
 							'no_hp'=>$dt->NO_HP,
-							'email'=>$dt->EMAIL);
+							'email'=>$dt->EMAIL,
+							'role'=>$dt->ROLE,
+							'type'=>$dt->TYPE,
+							'jenis'=>$dt->JENIS,
+							'id_bank'=>$dt->ID_BANK,
+							'id_bank_branch'=>$dt->ID_BANK_BRANCH,
+							'id_bank_subbranch'=>$dt->ID_BANK_SUBBRANCH);
 				$this->session->set_userdata( $sess );
-				redirect('users');
+				redirect('home');
 			}else{
 				$this->session->set_flashdata('msg', '<div class="alert alert-danger alert-dismissible fade in" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> <strong>Username dan Password salah</strong></div>');
 				redirect('welcome/login','refresh');

@@ -14,7 +14,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2016 <a href="http://almsaeedstudio.com">SaungIT</a></strong> - <b>Insurance Management System</b>.
+        <strong>Copyright &copy; 2016 <a target="_blank" href="http://sib-brokers.com">SIB</a></strong> - <b>Insurance Management System</b>.
     </div><!-- /.container -->
 </footer>
 </div><!-- ./wrapper -->

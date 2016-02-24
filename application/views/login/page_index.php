@@ -37,7 +37,10 @@
             <input type="password" name="password" class="form-control" placeholder="Please Insert Password"/>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+          <!-- by ip address -->
           <center><div class="g-recaptcha" data-sitekey="6Ldl4xcTAAAAAFnFP53rvrlrYOj1jGTevo70cg21"></div></center>
+          <!-- by dns -->
+          <!-- <center><div class="g-recaptcha" data-sitekey="6LdWSRgTAAAAAJsfOeuPURVXmURfBtd18dJUlwI7"></div></center> -->
           <div class="row">
             <!-- <div class="col-xs-8">    
               <div class="checkbox icheck">

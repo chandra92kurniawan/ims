@@ -11,12 +11,14 @@
     <meta charset="UTF-8">
     <title>IMS | <?php echo (isset($menu))?$menu:'$ menu belum ada';?></title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="shortcut icon" href="<?php echo base_url()?>assets/SIB1.png">
     <!-- Bootstrap 3.3.4 -->
     <link href="<?php echo base_url()?>assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url()?>assets/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo base_url()?>assets/dist/css/AdminLTE.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -41,10 +43,22 @@
     <script src="<?php echo base_url()?>assets/plugins/datatables/jquery.dataTables.js"></script>
     <link rel="stylesheet" href="<?php echo base_url()?>assets/validation/css/screen.css"/>
     <script src="<?php echo base_url()?>assets/validation/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url()?>assets/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
     <style type="text/css">
     .btn-frm{
         width: 100px;
     }
+    th{
+        text-align: center;
+    }
+    td{
+        font-size: 10px;
+    }
+    thead{
+        background-color: #79C3F9;
+    }
+    .dataTables_wrapper { font-size: 12px }
     </style>
     <!-- AdminLTE for demo purposes
 <script src="<?php echo base_url()?>assets/dist/js/demo.js" type="text/javascript"></script>-->
@@ -55,10 +69,10 @@
 <div class="wrapper">
 
     <header class="main-header">
-        <nav class="navbar navbar-static-top">
+        <nav class="navbar navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="<?php echo base_url()?>assets/index2.html" class="navbar-brand"><b>IMS</b></a>
+                    <a href="<?php echo base_url()?>home" class="navbar-brand"><b>IMS</b></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
@@ -67,16 +81,16 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Produksi Berjalan <span class="sr-only">(current)</span></a></li>
+                        <!-- <li class="active"><a href="#">Produksi Berjalan <span class="sr-only">(current)</span></a></li> -->
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kgb<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kredit Guna Bhakti<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Daftar Peserta Asuransi</a></li>
-                                <li><a href="#">Rekap Peserta Asuransi</a></li>
+                                <li><a href="<?php echo base_url()?>kgb/dpa">Daftar Peserta Asuransi</a></li>
+                                <li><a href="<?php echo base_url()?>kgb/rekap">Rekap Peserta Asuransi</a></li>
+                                <li><a href="<?php echo base_url()?>kgb/klaim">Klaim</a></li>
+                                <li><a href="<?php echo base_url()?>kgb/restitusi">Restitusi</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Klaim</a></li>
-                        <li><a href="#">Restitusi</a></li>
                         <li><a href="#">Rekapitulasi Premi</a></li>
                         <li><a href="#">Rekonsiliasi</a></li>
                     </ul>
@@ -89,9 +103,9 @@
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
+                        <!-- Messages: style can be found in dropdown.less->
                         <li class="dropdown messages-menu">
-                            <!-- Menu toggle button -->
+                            <!-- Menu toggle button ->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-envelope-o"></i>
                                 <span class="label label-success">4</span>
@@ -99,32 +113,32 @@
                             <ul class="dropdown-menu">
                                 <li class="header">You have 4 messages</li>
                                 <li>
-                                    <!-- inner menu: contains the messages -->
+                                    <!-- inner menu: contains the messages ->
                                     <ul class="menu">
-                                        <li><!-- start message -->
+                                        <li><!-- start message ->
                                             <a href="#">
                                                 <div class="pull-left">
-                                                    <!-- User Image -->
+                                                    <!-- User Image ->
                                                     <img src="<?php echo base_url()?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
                                                 </div>
-                                                <!-- Message title and timestamp -->
+                                                <!-- Message title and timestamp ->
                                                 <h4>
                                                     Support Team
                                                     <small><i class="fa fa-clock-o"></i> 5 mins</small>
                                                 </h4>
-                                                <!-- The message -->
+                                                <!-- The message ->
                                                 <p>Why not buy a new awesome theme?</p>
                                             </a>
-                                        </li><!-- end message -->
-                                    </ul><!-- /.menu -->
+                                        </li><!-- end message ->
+                                    </ul><!-- /.menu ->
                                 </li>
                                 <li class="footer"><a href="#">See All Messages</a></li>
                             </ul>
                         </li><!-- /.messages-menu -->
 
-                        <!-- Notifications Menu -->
+                        <!-- Notifications Menu ->
                         <li class="dropdown notifications-menu">
-                            <!-- Menu toggle button -->
+                            <!-- Menu toggle button ->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bell-o"></i>
                                 <span class="label label-warning">10</span>
@@ -132,21 +146,21 @@
                             <ul class="dropdown-menu">
                                 <li class="header">You have 10 notifications</li>
                                 <li>
-                                    <!-- Inner Menu: contains the notifications -->
+                                    <!-- Inner Menu: contains the notifications ->
                                     <ul class="menu">
-                                        <li><!-- start notification -->
+                                        <li><!-- start notification ->
                                             <a href="#">
                                                 <i class="fa fa-users text-aqua"></i> 5 new members joined today
                                             </a>
-                                        </li><!-- end notification -->
+                                        </li><!-- end notification ->
                                     </ul>
                                 </li>
                                 <li class="footer"><a href="#">View all</a></li>
                             </ul>
-                        </li>
-                        <!-- Tasks Menu -->
+                        </li>-->
+                        <!-- Tasks Menu ->
                         <li class="dropdown tasks-menu">
-                            <!-- Menu Toggle Button -->
+                            <!-- Menu Toggle Button ->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-flag-o"></i>
                                 <span class="label label-danger">9</span>
@@ -154,31 +168,31 @@
                             <ul class="dropdown-menu">
                                 <li class="header">You have 9 tasks</li>
                                 <li>
-                                    <!-- Inner menu: contains the tasks -->
+                                    <!-- Inner menu: contains the tasks ->
                                     <ul class="menu">
-                                        <li><!-- Task item -->
+                                        <li><!-- Task item ->
                                             <a href="#">
-                                                <!-- Task title and progress text -->
+                                                <!-- Task title and progress text ->
                                                 <h3>
                                                     Design some buttons
                                                     <small class="pull-right">20%</small>
                                                 </h3>
-                                                <!-- The progress bar -->
+                                                <!-- The progress bar ->
                                                 <div class="progress xs">
-                                                    <!-- Change the css width attribute to simulate progress -->
+                                                    <!-- Change the css width attribute to simulate progress ->
                                                     <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                                         <span class="sr-only">20% Complete</span>
                                                     </div>
                                                 </div>
                                             </a>
-                                        </li><!-- end task item -->
+                                        </li><!-- end task item ->
                                     </ul>
                                 </li>
                                 <li class="footer">
                                     <a href="#">View all tasks</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>-->
                         <!-- User Account Menu -->
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
@@ -186,18 +200,18 @@
                                 <!-- The user image in the navbar-->
                                 <img src="<?php echo base_url()?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs"><?php echo $this->session->userdata('username');?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                     <img src="<?php echo base_url()?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                                     <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
+                                        <?php echo $this->session->userdata('username');?>
+                                        <small></small>
+                                    </p> 
                                 </li>
-                                <!-- Menu Body -->
+                                <!-- Menu Body ->
                                 <li class="user-body">
                                     <div class="col-xs-4 text-center">
                                         <a href="#">Followers</a>
@@ -224,7 +238,7 @@
                 </div><!-- /.navbar-custom-menu -->
             </div><!-- /.container-fluid -->
         </nav>
-    </header>
+    </header><br><br>
     <!-- Full Width Column -->
     <div class="content-wrapper">
         <div class="container">

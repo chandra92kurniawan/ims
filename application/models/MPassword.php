@@ -11,6 +11,14 @@ class MPassword extends CI_Model {
     	$passFinal=do_hash($salt.$password);
     	return array('salt'=>$salt,'password'=>$passFinal);
 	}
+	function getBranch($branch){
+		$this->db->where('ID_BANK_BRANCH', $branch);
+		return $this->db->get('MST_BANK_BRANCH')->row()->NAME_BANK;
+	}
+	function getSubBranch($subbranch){
+		$this->db->where('ID_BANK_SUBBRANCH', $subbranch);
+		return $this->db->get('MST_BANK_SUB_BRANCH')->row()->NAME_BANK;
+	}
 	function confirmPassword($username,$str_password){
 		$user=$this->getUserByUsername($username);
 		if($user->num_rows()==0){
@@ -45,12 +53,12 @@ class MPassword extends CI_Model {
 	  'protocol' => 'smtp', 
 	  'smtp_host' => 'ssl://smtp.googlemail.com', 
 	  'smtp_port' => 465, 
-	  'smtp_user' => 'chandra@passionit.co.id', 
-	  'smtp_pass' => 'chandra28', ); 
+	  'smtp_user' => 'Helpdesk@sib-brokers.net', 
+	  'smtp_pass' => 'tolong', ); 
 
 	  $this->load->library('email', $config); 
 	  $this->email->set_newline("\r\n");
-	  $this->email->from('chandra@passionit.co.id', 'chandra');
+	  $this->email->from('Helpdesk@sib-brokers.net', 'SIB');
 	  $this->email->to($send);
 	  $this->email->subject($subject); 
 	  $this->email->message($msg);

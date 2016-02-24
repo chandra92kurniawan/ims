@@ -6,6 +6,9 @@ class Users extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+        if($this->session->userdata('username')==''){
+            redirect('welcome','refresh');
+        }
 		$this->load->model(array('m_user','mpassword'));
 	}
 	public function index()
@@ -26,6 +29,7 @@ class Users extends CI_Controller {
                 $rl[$r->ID]=$r->ROLE;
             }
             $data['rl']=$rl;
+            $this->db->order_by('NAME_BANK', 'Asc');
             $bnk=$this->db->get('MST_BANK')->result();
             $bank['']="- All -";
             foreach($bnk as $dt){
@@ -91,7 +95,7 @@ class Users extends CI_Controller {
                 Password : <b>".$this->input->post('password1')."</b>";
         $this->mpassword->sendemail($send,$subject,$msg);
     	$password=$this->input->post('password1');
-        $this->mpassword->sendemail();
+        $this->mpassword->sendemail($send,$subject,$msg);
         $pass=$this->mpassword->createPassword($this->input->post('password1'));
     	$data=array('USERNAME'=>$this->input->post('username'),
     				'JABATAN'=>$this->input->post('jabatan'),
@@ -200,6 +204,7 @@ class Users extends CI_Controller {
     }
     public function getBranch(){
         $bank=$this->input->post('bank');
+        $this->db->order_by('NAME_BANK', 'ASC');
         $this->db->where('ID_BANK', $bank);
         $branch=$this->db->get('MST_BANK_BRANCH')->result();
         $brc['']="- ALL -";
@@ -219,6 +224,7 @@ class Users extends CI_Controller {
     }
     public function getSubBranch(){
         $branch=$this->input->post('branch');
+        $this->db->order_by('NAME_BANK', 'ASC');
         $this->db->where('ID_BANK_BRANCH', $branch);
         $data=$this->db->get('MST_BANK_SUB_BRANCH')->result();
         $b['']="- All -";
