@@ -26,7 +26,7 @@
                               <?php 
                               if($this->session->userdata('id_bank_branch')!=''){
                                 echo "<input type='hidden' name='branch' value='".$this->session->userdata('id_bank_branch')."'>";
-                                echo "<input type='text' class='form-control' readonly='' name='asdc' value='".$this->mpassword->getBranch($this->session->userdata('id_bank_branch'))."'>";
+                                echo "<input type='text' class='form-control' readonly='' name='asdc' value='".$this->Mpassword->getBranch($this->session->userdata('id_bank_branch'))."'>";
                               }else{                                
                                 echo form_dropdown('branch', $branch, $this->session->userdata('id_bank_branch'),"class='form-control' id='branch'");
                               }
@@ -39,7 +39,7 @@
                               <?php 
                               if($this->session->userdata('id_bank_subbranch')!=''){
                                 echo "<input type='hidden' name='subbranch' value='".$this->session->userdata('id_bank_subbranch')."'>";
-                                echo "<input type='text' class='form-control' readonly='' name='asdc' value='".$this->mpassword->getSubBranch($this->session->userdata('id_bank_subbranch'))."'>";
+                                echo "<input type='text' class='form-control' readonly='' name='asdc' value='".$this->Mpassword->getSubBranch($this->session->userdata('id_bank_subbranch'))."'>";
                               }else{                                
                                 echo form_dropdown('subbranch', $subbranch, $this->session->userdata('id_bank_subbranch'),"class='form-control' id='subbranch'");
                               }

@@ -89,6 +89,7 @@
                                 <li><a href="<?php echo base_url()?>kgb/rekap">Rekap Peserta Asuransi</a></li>
                                 <li><a href="<?php echo base_url()?>kgb/klaim">Klaim</a></li>
                                 <li><a href="<?php echo base_url()?>kgb/restitusi">Restitusi</a></li>
+                                <li><a href="<?php echo base_url()?>kgb/polis">Polis</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Rekapitulasi Premi</a></li>

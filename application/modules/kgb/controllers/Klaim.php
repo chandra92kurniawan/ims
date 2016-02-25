@@ -5,7 +5,7 @@ class Klaim extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('mklaim');
+		$this->load->model('Mklaim');
 	}
 	public function index()
 	{
@@ -26,7 +26,7 @@ class Klaim extends CI_Controller {
 	public function ajax_list()
     {
         //echo $this->input->post('range');
-    	$list = $this->mklaim->get_datatables();
+    	$list = $this->Mklaim->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $person) {
@@ -47,8 +47,8 @@ class Klaim extends CI_Controller {
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->mklaim->count_all(),
-                        "recordsFiltered" => $this->mklaim->count_filtered(),
+                        "recordsTotal" => $this->Mklaim->count_all(),
+                        "recordsFiltered" => $this->Mklaim->count_filtered(),
                         "data" => $data,
                 );
         //output to json format

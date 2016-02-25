@@ -8,7 +8,7 @@ class Rekap extends CI_Controller {
 		if($this->session->userdata('username')==''){
             redirect('welcome','refresh');
         }
-		$this->load->model(array('m_rekap','mdpa','mpassword'));
+		$this->load->model(array('M_rekap','Mdpa','Mpassword'));
 	}
 	public function index()
 	{
@@ -18,22 +18,22 @@ class Rekap extends CI_Controller {
 		//$head['judul']="Data User";
 		$head['menu']="Rekap Peserta Asuransi";
 		$head['bc']=$menu;
-		$periode=$this->m_rekap->getPeriode();
+		$periode=$this->M_rekap->getPeriode();
 		$p['']="- All -";
 		foreach($periode as $periode){
 			$p[$periode->PERIODE]=$periode->PERIODE;
 		}
 		$data['periode']=$p;
-		$data['branch']=$this->m_rekap->dropdownBranch();
-		$data['subbranch']=$this->m_rekap->dropdownSubBranch($branch);
-		$data['asuradur']=$this->m_rekap->dropdownAsurandur();
+		$data['branch']=$this->M_rekap->dropdownBranch();
+		$data['subbranch']=$this->M_rekap->dropdownSubBranch($branch);
+		$data['asuradur']=$this->M_rekap->dropdownAsurandur();
 		$this->load->view('layout/page_header',$head);
 		$this->load->view('rekap/page_index',$data);
 		$this->load->view('layout/page_footer');
 	}
 	function getSubBranch(){
 		$branch=$this->input->post('branch');
-		$data=$this->m_rekap->dropdownSubBranch($branch);
+		$data=$this->M_rekap->dropdownSubBranch($branch);
 		echo form_dropdown('subbranch', $data, '',"class='form-control' id='subbranch'");
 	}
 	function getData(){
@@ -46,7 +46,7 @@ class Rekap extends CI_Controller {
 	}
 	public function ajax_list()
     {
-        $list = $this->m_rekap->get_datatables();
+        $list = $this->M_rekap->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $person) {
@@ -69,8 +69,8 @@ class Rekap extends CI_Controller {
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->m_rekap->count_all(),
-                        "recordsFiltered" => $this->m_rekap->count_filtered(),
+                        "recordsTotal" => $this->M_rekap->count_all(),
+                        "recordsFiltered" => $this->M_rekap->count_filtered(),
                         "data" => $data,
                 );
         //output to json format

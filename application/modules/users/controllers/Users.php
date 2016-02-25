@@ -9,7 +9,7 @@ class Users extends CI_Controller {
         if($this->session->userdata('username')==''){
             redirect('welcome','refresh');
         }
-		$this->load->model(array('m_user','mpassword'));
+		$this->load->model(array('M_user','Mpassword'));
 	}
 	public function index()
 	{
@@ -42,7 +42,7 @@ class Users extends CI_Controller {
 	}
 	public function ajax_list()
     {
-        $list = $this->m_user->get_datatables();
+        $list = $this->M_user->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $person) {
@@ -73,8 +73,8 @@ class Users extends CI_Controller {
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->m_user->count_all(),
-                        "recordsFiltered" => $this->m_user->count_filtered(),
+                        "recordsTotal" => $this->M_user->count_all(),
+                        "recordsFiltered" => $this->M_user->count_filtered(),
                         "data" => $data,
                 );
         //output to json format
@@ -93,10 +93,10 @@ class Users extends CI_Controller {
         $subject="User Account";
         $msg="Username : <b>".$this->input->post('username')."</b><br>
                 Password : <b>".$this->input->post('password1')."</b>";
-        $this->mpassword->sendemail($send,$subject,$msg);
+        $this->Mpassword->sendemail($send,$subject,$msg);
     	$password=$this->input->post('password1');
-        $this->mpassword->sendemail($send,$subject,$msg);
-        $pass=$this->mpassword->createPassword($this->input->post('password1'));
+        $this->Mpassword->sendemail($send,$subject,$msg);
+        $pass=$this->Mpassword->createPassword($this->input->post('password1'));
     	$data=array('USERNAME'=>$this->input->post('username'),
     				'JABATAN'=>$this->input->post('jabatan'),
     				'NO_HP'=>$this->input->post('no_hp'),
@@ -115,13 +115,9 @@ class Users extends CI_Controller {
     	redirect('users','refresh');
     }
     public function test2(){
-        $from=array('email'=>'chakz790@gmail.com','name'=>'chandra');
-        
-        $send=$this->input->post('email');
-        $subject="User Account";
-        $msg="Username : <b>s</b><br>
-                Password : <b>b</b>";
-        $this->mpassword->sendemail($from,$send,$subject,$msg);
+        //sendemail($send='',$subject='',$msg='')
+        $this->Mpassword->sendemail('chandra@passionit.co.id','SIB','SIB EUy');
+
     }
     public function edit(){
         $username=$this->input->post('username');
@@ -147,7 +143,7 @@ class Users extends CI_Controller {
         redirect('users','refresh');
     }
     public function test(){
-    	$cek=$this->mpassword->confirmPassword('farid','chandra28');
+    	$cek=$this->Mpassword->confirmPassword('farid','chandra28');
     	if($cek){
     		echo "benar";
     	}else{
@@ -156,7 +152,7 @@ class Users extends CI_Controller {
     }
     public function getDtUser(){
         $username=$this->input->post('username');
-        $data=$this->mpassword->getUserByUsername($username)->row();
+        $data=$this->Mpassword->getUserByUsername($username)->row();
         print_r(json_encode($data));
     }
     public function getAdded()

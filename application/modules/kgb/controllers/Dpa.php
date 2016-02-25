@@ -8,7 +8,7 @@ class Dpa extends CI_Controller {
         if($this->session->userdata('username')==''){
             redirect('welcome','refresh');
         }
-		$this->load->model(array('mdpa','m_rekap','mpassword'));
+		$this->load->model(array('Mdpa','M_rekap','Mpassword'));
 	}
 	public function index()
 	{
@@ -18,10 +18,10 @@ class Dpa extends CI_Controller {
 		//$head['judul']="Data User";
 		$head['menu']="Daftar Peserta Asuransi";
 		$head['bc']=$menu;
-		$data['periode']=$this->mdpa->getPeriode();
-		$data['branch']=$this->m_rekap->dropdownBranch();
-		$data['subbranch']=$this->m_rekap->dropdownSubBranch($branch);
-        $data['asuradur']=$this->mdpa->dropdownAsurandur();
+		$data['periode']=$this->Mdpa->getPeriode();
+		$data['branch']=$this->M_rekap->dropdownBranch();
+		$data['subbranch']=$this->M_rekap->dropdownSubBranch($branch);
+        $data['asuradur']=$this->Mdpa->dropdownAsurandur();
 		$this->load->view('layout/page_header',$head);
 		$this->load->view('dpa/page_index',$data);
 		$this->load->view('layout/page_footer');
@@ -36,7 +36,7 @@ class Dpa extends CI_Controller {
 	}
 	public function ajax_list()
     {
-    	$list = $this->mdpa->get_datatables();
+    	$list = $this->Mdpa->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $person) {
@@ -67,8 +67,8 @@ class Dpa extends CI_Controller {
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->mdpa->count_all(),
-                        "recordsFiltered" => $this->mdpa->count_filtered(),
+                        "recordsTotal" => $this->Mdpa->count_all(),
+                        "recordsFiltered" => $this->Mdpa->count_filtered(),
                         "data" => $data,
                 );
         //output to json format

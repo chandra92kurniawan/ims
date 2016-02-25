@@ -21,7 +21,7 @@ class Welcome extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('mpassword');
+		$this->load->model('Mpassword');
 	}
 	public function index(){
 		$username=$this->session->userdata('username');
@@ -39,9 +39,9 @@ class Welcome extends CI_Controller {
 		$username=$this->input->post('username');
 		$password=$this->input->post('password');
 		if($_POST['g-recaptcha-response']!=''){
-			$data=$this->mpassword->confirmPassword($username,$password);
+			$data=$this->Mpassword->confirmPassword($username,$password);
 			if($data){
-				$dt=$this->mpassword->getUserByUsername($username)->row();
+				$dt=$this->Mpassword->getUserByUsername($username)->row();
 				$sess=array('username'=>$dt->USERNAME,
 							'jabatan'=>$dt->JABATAN,
 							'no_hp'=>$dt->NO_HP,

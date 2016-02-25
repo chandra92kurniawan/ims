@@ -6,7 +6,7 @@ class Restitusi extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('mrestitusi');
+        $this->load->model('Mrestitusi');
     }
 	public function index()
 	{
@@ -26,7 +26,7 @@ class Restitusi extends CI_Controller {
 	}
 	public function ajax_list()
     {
-    	$list = $this->mrestitusi->get_datatables();
+    	$list = $this->Mrestitusi->get_datatables();
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $person) {
@@ -57,8 +57,8 @@ class Restitusi extends CI_Controller {
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->mrestitusi->count_all(),
-                        "recordsFiltered" => $this->mrestitusi->count_filtered(),
+                        "recordsTotal" => $this->Mrestitusi->count_all(),
+                        "recordsFiltered" => $this->Mrestitusi->count_filtered(),
                         "data" => $data,
                 );
         //output to json format
